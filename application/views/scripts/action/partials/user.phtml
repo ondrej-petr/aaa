@@ -1,0 +1,11 @@
+<tr>
+	<td>
+		<?php if ($this->model->isItMe()): ?>já (<?php endif ?>
+		<a href="<?= $this->baseUrl($this->model->isItMe()
+				? 'moje'
+				: ($this->translate('uzivatel') . '/' . rawurlencode(OPLib_EasyCrypt::encrypt($this->model->getUserId(), 'aes128')))) ?>">
+			<?= $this->model->getName() ?>
+		</a>
+		<?php if ($this->model->isItMe()): ?>)<?php endif ?>
+	</td>
+</tr>

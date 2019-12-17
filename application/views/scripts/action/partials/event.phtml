@@ -1,0 +1,39 @@
+<?php
+	$proposal = $this->model->getChosenProposal();
+	$date = $this->model->getDate();
+?>
+<tr>
+	<td>
+		<a href="<?= $this->baseUrl($this->translate('akce') . '/' . $this->model->getActionId() . '/' . $this->model->getEventNo()) ?>">
+			<?= $this->model->getEventNo() ?>
+		</a>
+	</td>
+	<td>
+		<span class="row-desc"><?= $this->model->getDescription() ?></span>
+		<?php if ($this->model->getState() == 'active' ): ?>
+			<?php if ($proposal != false && $proposal->isPast()): ?>
+				<span class="label label-default label-as-badge"><?= $this->translate('state-past') ?></span>
+			<?php else: ?>
+				<span class="label label-info label-as-badge"><?= $this->translate('state-active') ?></span>
+				<?php if (!($proposal && $this->model->getChosenProposal())): ?>
+				<span class="label label-success label-as-badge"><?= $this->translate('state-ready-to-vote') ?></span>
+				<?php endif ?>
+			<?php endif ?>
+		<?php endif ?>
+	</td>
+	<td>
+		<?php if ($date): ?>
+			<?php if (!$proposal): ?>
+				<?php if (!$this->model->getChosenProposal()): ?>
+				<span class="label label-warning label-as-badge"><?= $this->translate('state-date-not-chosen') ?></span>
+				<?php endif ?>
+			<?php elseif (!$proposal->isPast() && $this->model->getChosenProposal()): ?>
+				<span class="label label-success label-as-badge"><?= $this->translate('state-date-chosen') ?></span>
+			<?php endif ?>
+			<?= $date ?>
+		<?php endif?>
+	</td>
+	<td>
+		<?= $this->model->getPlace() ?>
+	</td>
+</tr>

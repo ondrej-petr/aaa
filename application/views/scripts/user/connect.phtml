@@ -1,0 +1,59 @@
+<div class="container">
+	<h3><?= $this->translate('Propojení účtu') ?></h3>
+
+	<br />
+
+
+	<?php if (isset($this->user)): ?>
+		<h4>
+			<?= $this->translate('Ahoj, <br />vypadá to, že už u nás máš účet. Chceš ho propojit?') ?>
+		</h4>
+
+		<br /><br />
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="row">
+					<?php foreach ($this->providers as $provider): ?>
+						<div class="col-xs-3">
+							<img src=<?= $this->user->getProfileImage()->getThumbnail('w175h175') ?> alt="<?= $this->user->getName() ?>" class="img-responsive img-circle img-thumbnail" />
+						</div>
+						<div class="col-xs-9">
+							<h2 class="editable" data-type="text"><?= $this->user->getFirstName() ?> <?= $this->user->getLastName() ?></h2>
+
+								<a class="btn btn-<?= $provider->getName() == 'facebook' ? 'primary' : ($provider->getName() == 'google' ? 'danger' : 'info') ?>"
+									href="<?= $this->baseUrl('/' . $this->translate('propojeni-uctu')) . '/' . $provider->getName() ?>">
+									<i class="fa fa-<?= $provider->getName() == 'google' ? 'google-plus' : $provider->getName() ?>"></i>
+									&nbsp; <?= $this->translate('Propojit'); ?>
+								</a>
+						</div>
+					<?php endforeach ?>
+				</div>
+			</div>
+			<div class="col-md-6">
+			</div>
+		</div>
+
+		<div class="text-center">
+			<a class="btn btn-default" href="<?= $this->baseUrl($this->translate('vytvoreni-uctu')) ?>"><i class="fa fa-times"></i>&nbsp; <?= $this->translate('Zrušit') ?></a>
+		</div>
+	<?php else: ?>
+		<h4>
+			<?= $this->translate('Ahoj, <br />vypadá to, že u nás ještě nemáš účet. Chceš ho vytvořit?') ?>
+		</h4>
+
+		<br /><br />
+
+		<div class="text-center">
+			<?php foreach ($this->providers as $provider): ?>
+				<a class="btn btn-<?= $provider->getName() == 'facebook' ? 'primary' : ($provider->getName() == 'google' ? 'danger' : 'info') ?>"
+					href="<?= $this->baseUrl('/' . $this->translate('propojeni-uctu')) . '/' . $provider->getName() ?>">
+					<i class="fa fa-<?= $provider->getName() == 'google' ? 'google-plus' : $provider->getName() ?>"></i>
+					&nbsp; <?= $this->translate('Vytvořit'); ?>
+				</a>
+			<?php endforeach ?>
+
+			<a class="btn btn-default" href="<?= $this->baseUrl($this->translate('vytvoreni-uctu')) ?>"><i class="fa fa-times"></i>&nbsp; <?= $this->translate('Zrušit') ?></a>
+		</div>
+	<?php endif ?>
+</div>

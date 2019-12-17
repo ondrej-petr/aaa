@@ -1,0 +1,51 @@
+<?php
+	$nextEvent = $this->model->getNextEvent();
+	$lastEvent = $this->model->getLastEvent();
+?>
+
+<tr id="action<?= $this->model->getActionId() ?>">
+	<td class="hidden">
+		<?= $this->model->getActionId() ?>
+	</td>
+	<td class="align-middle">
+		<?php if ($this->model->getIsPaused()): ?>
+		<i class="fa fa-pause" aria-hidden="true"></i>
+		<?php endif ?>
+	</td>
+	<td>
+		<a href="/<?= $this->translate('akce') . '/' . $this->model->getActionId() ?>"><?= $this->model->getTitle() ?></a>
+		<div class="row-desc"><?= $this->truncate($this->model->getDescription(), 100) ?></div>
+	</td>
+	<td>
+		<?php if ($this->model->getIsPaused()): ?>
+			Akce byla pozastavena
+		<?php elseif ($nextEvent): ?>
+			<a href="<?= $nextEvent->getUrl() ?>">
+				<?php if (!$nextEvent->getChosenProposal() && !$nextEvent->getIsClosed()): ?>
+					<span class="label label-warning label-as-badge"><?= $this->translate('state-date-not-chosen') ?></span>
+				<?php endif ?>
+				<?= $nextEvent->getDate() ?>
+			</a>
+		<?php else: ?>
+			<?= $this->translate('Další událost nebyla vytvořena') ?>
+		<?php endif ?>
+	</td>
+	<td>
+		<?php if ($lastEvent && $lastEvent->getChosenProposal()): ?>
+			<a href="<?= $lastEvent->getUrl() ?>">
+				<?= $lastEvent->getDate() ?>
+			</a>
+		<?php else: ?>
+			<?= $this->translate('Žádná proběhlá událost nebyla nalezena') ?>
+		<?php endif ?>
+	</td>
+	<td>
+		<i class="fa fa-times"
+			aria-hidden="true"
+			data-toggle="modal"
+			data-target="#removeActionModal"
+			data-action-id="<?= $this->model->getActionId() ?>"
+			data-action-title="<?= $this->model->getTitle() ?>">
+		</i>
+	</td>
+</tr>

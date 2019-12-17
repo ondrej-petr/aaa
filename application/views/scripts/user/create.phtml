@@ -1,0 +1,30 @@
+<div class="container">
+	<h3><?= $this->translate('Vytvoření účtu') ?></h3>
+
+	<div class="row">
+		<div class="col-md-6">
+			<?= $this->form ?>
+		</div>
+
+		<div class="col-md-6 text-center">
+			<div class="well">
+				<h4><?= $this->translate('A nebo si vytvoř účet pomocí své oblíbené sociální sítě') ?></h4>
+				<div class="text-center">
+					<a id="googleBtn" class="btn btn-danger" href="<?= $this->googleAuthUrl ?>">
+						<i class="fa fa-google-plus"></i>&nbsp; Google
+					</a>
+					<a class="btn btn-primary" href="<?= $this->facebookAuthUrl ?>"><i class="fa fa-facebook"></i>&nbsp; Facebook</a>
+					<!-- a class="btn btn-info" href="<?= $this->twitterAuthUrl ?>"><i class="fa fa-twitter"></i>&nbsp; Twitter</a -->
+				</div>
+			</div>
+
+			<?php if (isset($this->hash)): ?>
+			<div id="noRegBtn" class="well">
+				<a id="googleBtn" class="btn btn-info" href="<?= $this->baseUrl('user/no-reg/') . $this->hash ?>">
+					<i class="fa fa-user"></i>&nbsp; pokračovat bez registrace
+				</a>
+			</div>
+			<?php endif ?>
+		</div>
+	</div>
+</div>

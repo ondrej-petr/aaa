@@ -1,0 +1,58 @@
+<div id="userDetail" class="container">
+	<h1 class="page-header"><?= $this->translate('Uživatelský účet') ?></h1>
+
+	<div class="row">
+
+		<!-- Blog Entries Column -->
+		<div class="col-md-8">
+			<div class="row">
+				<div class="col-xs-3">
+					<img src="<?= $this->user->getProfileImage()->getThumbnail('w175h175') ?>"
+						alt="<?= $this->user->getName() ?>"
+						class="img-responsive img-circle img-thumbnail" />
+				</div>
+				<div class="col-xs-9">
+					<h2><?= $this->user->getFirstName() ?> <?= $this->user->getLastName() ?></h2>
+				</div>
+			</div>
+		</div>
+
+		<!-- Blog Sidebar Widgets Column -->
+		<div class="col-md-4">
+
+			<!-- Blog Search Well -->
+			<!-- div class="well">
+				<h4>Blog Search</h4>
+				<div class="input-group">
+					<input type="text" class="form-control">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+					</span>
+				</div>
+			</div -->
+
+			<div class="well">
+				<h4><?= $this->translate('Poslední akce uživatele') ?></h4>
+				<br />
+				<div class="row">
+					<?php foreach ($this->usersActions as $action): ?>
+						<ul class="list-unstyled col-md-6">
+							<li><a href="/<?= $this->translate('akce') . '/' . $action->getActionId() ?>"><?= $action->getTitle() ?></a></li>
+						</ul>
+					<?php endforeach ?>
+				</div>
+			</div>
+
+			<!-- Side Widget Well -->
+			<!-- div class="well">
+				<h4>Side Widget Well</h4>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+			</div-->
+
+		</div>
+
+	</div>
+	<!-- /.row -->
+
+
+</div>
